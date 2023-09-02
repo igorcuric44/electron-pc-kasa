@@ -1,0 +1,22 @@
+{
+  "name": "project24",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^26.0.0"
+  },
+  "dependencies": {
+    "electron-print": "^1.0.2",
+    "html-pdf": "^3.0.1",
+    "pdf-creator-node": "^2.3.5",
+    "puppeteer": "^21.1.0",
+    "sqlite3": "^5.1.6"
+  },
+  "description": ""
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PC BLAGAJNA - CuricSoftDevelopmentTech</title>
+<style>
+    #naziv {
+        text-align:center;
+    }
+
+    button {
+        width:100%;
+        padding:10px;
+        background-color:#ccc;
+        font-size:1.5em;
+    }
+
+    button:hover {
+        background-color:#777;
+    }
+</style>
+<link rel="stylesheet" href="./titlebar.css">
+</head>
+<body>
+    <header id="titlebar">
+        <div class="draggable">
+            <div class="controls">
+                <span class="button close"></span>
+                <span class="button minimize"></span>
+                <span class="button maximize"></span>
+            </div>
+    
+            <span class="title">
+                <script>document.write(document.title)</script>
+            </span>
+        </div>
+    </header>
+
+    <h1 id="naziv">GLAVNI PROZOR</h1>
+    <button id="parent0">BLAGAJNA</button><br><br>
+    <!-- <button id="parent1">BLAGAJNA</button><br><br> -->
+    <button id="parent2">UNOS</button><br><br>
+    <button id="parent3">SKLADISTE</button><br><br>
+    <button id="parent4">UNOS SIFARA</button><br><br>
+    <button id="parent5">SIFRARNIK</button><br><br>
+    <button id="parent6">POPUNA SKLADISTA</button><br><br>
+    <button id="parent7">BRISANJE ARTIKLA</button><br><br>
+    <button id="parent8">PROMIJENA CIJENE</button><br><br>
+    <button id="parent9">DJELATNICI</button><br><br>
+    <button id="parent10">POSTAVKE</button><br><br>
+
+    <button id="parent11">IZLAZ</button><br><br>
+
+    <script>  
+
+        let p0,p1,p2,p3;
+
+        async function openWindow0()
+        {
+            console.log("open Window 0");
+            p0=await window.api.get_zaporka("hello from renderer zaporka");
+            document.getElementById("parent0").style.color="blue";
+            console.log(p0);
+        }
+
+
+        async function openWindow1()
+        {
+            console.log("open Window 1");
+            p1=await window.api.get_blagajna("hello from renderer blagajna");
+            document.getElementById("parent1").style.color="blue";
+            console.log(p1);
+        }
+
+        async function openWindow2()
+        {
+            console.log("open Window 2");
+            p2=await window.api.get_unos("hello from renderer unos");
+            document.getElementById("parent2").style.color="blue";
+            console.log(p2);
+        }
+        
+        async function openWindow3()
+        {
+            console.log("open Window 3");
+            p2=await window.api.get_version("hello from renderer skladiste");
+            document.getElementById("parent3").style.color="blue";
+            console.log(p2);
+        }
+
+        let sifre;
+
+        async function openWindow4()
+        {
+            console.log("open Window 4");
+            sifre=await window.api.get_sifre("hello from renderer unos sifara");
+            document.getElementById("parent4").style.color="blue";
+            console.log(sifre);
+        }
+
+        let sif;
+        
+        async function openWindow5()
+        {
+            console.log("open Window 5");
+            sif=await window.api.get_sifrarnik("hello from renderer sifrarnik");
+            document.getElementById("parent5").style.color="blue";
+            console.log(sif);
+        }
+
+        let sklad;
+
+        async function openWindow6()
+        {
+            console.log("open Window 6");
+            sklad=await window.api.get_skladisnica("hello from renderer index sifrarnik");
+            document.getElementById("parent6").style.color="blue";
+            console.log(sklad);
+        }
+
+        let bris;
+
+        async function openWindow7()
+        {
+            console.log("open Window 7");
+            bris=await window.api.get_brisanje("hello from renderer index brisanje");
+            document.getElementById("parent7").style.color="blue";
+            console.log(bris);
+        }
+
+        let cije;
+
+        async function openWindow8()
+        {
+            console.log("open Window 8");
+            cije=await window.api.get_cijene("hello from renderer index cijene");
+            document.getElementById("parent8").style.color="blue";
+            console.log(cije);
+        }
+
+        let dje;
+
+        async function openWindow9()
+        {
+            console.log("open Window 9");
+            dje=await window.api.get_djelatnici("hello from renderer index djelatnici");
+            document.getElementById("parent9").style.color="blue";
+            console.log(dje);
+        }
+
+
+        let post;
+
+        async function openWindow10()
+        {
+            console.log("open Window 10");
+            post=await window.api.get_postavke("hello from renderer index postavke");
+            document.getElementById("parent10").style.color="blue";
+            console.log(post);
+        }
+
+
+        function openWindow11()
+        {
+            console.log("open Window 11");
+            console.log("skladiste console")
+            window.api.sendMsg("pong from index");
+        }
+
+        document.getElementById("parent0").addEventListener("click",openWindow0);
+        // document.getElementById("parent1").addEventListener("click",openWindow1);
+        document.getElementById("parent2").addEventListener("click",openWindow2);
+        document.getElementById("parent3").addEventListener("click",openWindow3);
+        document.getElementById("parent4").addEventListener("click",openWindow4);
+        document.getElementById("parent5").addEventListener("click",openWindow5);
+        document.getElementById("parent6").addEventListener("click",openWindow6);
+        document.getElementById("parent7").addEventListener("click",openWindow7);
+        document.getElementById("parent8").addEventListener("click",openWindow8);
+        document.getElementById("parent9").addEventListener("click",openWindow9);
+        document.getElementById("parent10").addEventListener("click",openWindow10);
+
+
+        document.getElementById("parent11").addEventListener("click",openWindow11);
+
+        const closeButton = document.querySelector('.button.close');
+        const minimizeButton = document.querySelector('.button.minimize');
+        const maximizeButton = document.querySelector('.button.maximize');
+
+        closeButton.addEventListener("click",close);
+        minimizeButton.addEventListener("click",minimize);
+        maximizeButton.addEventListener("click",maximize);
+
+
+        function close()
+        {
+            console.log("Close Window");
+            window.poruka.closeMsg("Close pong");
+        }
+
+        function minimize()
+        {
+            console.log("Minimize Window");
+            window.poruka.minimizeMsg("Minimize pong");
+        }
+
+        function maximize()
+        {
+            console.log("Maximize Window");
+            window.poruka.maximizeMsg("maximize pong");
+        }
+
+
+    </script>
+</body>
+</html>
