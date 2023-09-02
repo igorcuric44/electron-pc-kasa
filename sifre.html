@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIFRE</title>
+    <style>
+        table {
+            width:100%;
+        }
+
+        table,th,td{
+            border:1px solid #ccc;
+        }
+        input{
+            width:50%;
+        }
+        button {
+            width:100%;
+            padding:15px;
+            background-color:#ccc;
+            font-size:1.5em;
+        }
+
+        button:hover{
+            background-color:#777;
+        }
+    </style>
+<link rel="stylesheet" href="./titlebar.css">
+</head>
+<body>
+    <header id="titlebar">
+        <div class="draggable">
+            <div class="controls">
+                <span class="button close"></span>
+                <span class="button minimize"></span>
+                <span class="button maximize"></span>
+            </div>
+    
+            <span class="title">
+                <script>document.write(document.title)</script>
+            </span>
+        </div>
+    </header>
+    
+    <table>
+        <tr><td>id</td><td><input id="id" type="text"></td></tr>
+        <tr><td>artikl</td><td><input id="artikl" type="text"></td></tr>
+        <tr><td>id1</td><td><input id="id1" type="text"></td></tr>
+        <tr><td>mjera1</td><td><input id="mjera1" type="text"></td></tr>
+        <tr><td>cijena1</td><td><input id="cijena1" type="text"></td></tr>
+        <tr><td>pdv1</td><td><input id="pdv1" type="text"></td></tr>
+        <tr><td>id2</td><td><input id="id2" type="text"></td></tr>
+        <tr><td>mjera2</td><td><input id="mjera2" type="text"></td></tr>
+        <tr><td>cijena2</td><td><input id="cijena2" type="text"></td></tr>
+        <tr><td>pdv2</td><td><input id="pdv2" type="text"></td></tr>
+    </table>
+    <button id="zatvori">Zatvori</button>
+
+    <script>
+
+document.querySelector("#zatvori").addEventListener("click",closeWindow);
+
+async function closeWindow(){
+    let idx=document.querySelector("#id").value;
+    let artiklx=document.querySelector("#artikl").value;
+    let id1x=document.querySelector("#id1").value;
+    let mjera1x=document.querySelector("#mjera1").value;
+    let cijena1x=document.querySelector("#cijena1").value;
+    let pdv1x=document.querySelector("#pdv1").value;
+    let id2x=document.querySelector("#id2").value;
+    let mjera2x=document.querySelector("#mjera2").value;
+    let cijena2x=document.querySelector("#cijena2").value;
+    let pdv2x=document.querySelector("#pdv2").value;
+    
+
+    console.log(idx," ",artiklx," ",id1x," ",mjera1x," ",pdv1x," ",cijena1x," ",id2x," ",mjera2x," ",pdv2x," ",cijena2x);
+
+
+    console.log("unos console")
+    let pp=await window.apisifre.sqlsifre(idx,artiklx,id1x,mjera1x,cijena1x,pdv1x,id2x,mjera2x,cijena2x,pdv2x);
+   // console.log(pp);
+    //window.apidjelatnici.sendMsg("pong unos djelatnici zatvorio prozor");
+}
+
+    const closeButton = document.querySelector('.button.close');
+    const minimizeButton = document.querySelector('.button.minimize');
+    const maximizeButton = document.querySelector('.button.maximize');
+
+    closeButton.addEventListener("click",close);
+    minimizeButton.addEventListener("click",minimize);
+    maximizeButton.addEventListener("click",maximize);
+
+
+    function close()
+    {
+        console.log("Close Window");
+        window.poruka.closeMsg("Close pong");
+    }
+
+    function minimize()
+    {
+        console.log("Minimize Window");
+        window.poruka.minimizeMsg("Minimize pong");
+    }
+
+    function maximize()
+    {
+        console.log("Maximize Window");
+        window.poruka.maximizeMsg("maximize pong");
+    }
+
+    </script>
+
+</body>
+</html>

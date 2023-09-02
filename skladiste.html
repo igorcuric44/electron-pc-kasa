@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKLADISTE</title>
+    
+    <style>
+        table {
+            width: 100%;
+            height:400px;
+            overflow: hidden;
+        }
+        table,td,th{
+            border:1px solid grey;
+        }
+        tr:nth-child(even) {
+            background-color: #ccc;
+            color:#282C34; 
+        }
+       
+
+        div#demo{
+            height:600px;
+        }
+        
+        button {
+            width:100%;
+            padding:15px;
+            background-color:#ccc;
+            font-size:1.5em;
+        }
+
+        button:hover{
+            background-color:#777;
+        }
+
+    </style>
+<link rel="stylesheet" href="./titlebar.css">
+</head>
+<body>
+    <header id="titlebar">
+        <div class="draggable">
+            <div class="controls">
+                <span class="button close"></span>
+                <span class="button minimize"></span>
+                <span class="button maximize"></span>
+            </div>
+    
+            <span class="title">
+                <script>document.write(document.title)</script>
+            </span>
+        </div>
+    </header>
+
+<div style='overflow-y: auto;' id="demo"></div>
+<button id="zatvori">Zatvori</button>
+<script>
+
+
+document.addEventListener("DOMContentLoaded",async ()=>
+{
+let names=await window.apiskladiste.sqlwait();
+console.log(names);
+
+str="<table>";
+str+="<caption>SKLADISTE</caption>";
+str+="<tr><th>ID</th><th>ARTIKL</th><th>PDV</th><th>KOLICINA</th><th>CIJENA</th></tr>";
+for(let i=0;i<names.length;i++)
+{
+
+    str+="<tr><td>"+names[i].id+"</td><td>"+names[i].artikl+"</td><td>"+names[i].pdv+"</td><td>"+names[i].kolicina+"</td><td>"+names[i].cijena+"</td></tr>";
+}
+str+="</table>";
+document.querySelector("#demo").innerHTML=str;
+
+})
+
+document.querySelector("#zatvori").addEventListener("click",closeWindow);
+
+function closeWindow(){
+    console.log("skladiste console")
+    window.apiskladiste.sendMsg("pong");
+}
+ 
+const closeButton = document.querySelector('.button.close');
+const minimizeButton = document.querySelector('.button.minimize');
+const maximizeButton = document.querySelector('.button.maximize');
+
+closeButton.addEventListener("click",close);
+minimizeButton.addEventListener("click",minimize);
+maximizeButton.addEventListener("click",maximize);
+
+
+function close()
+{
+    console.log("Close Window");
+    window.poruka.closeMsg("Close pong");
+}
+
+function minimize()
+{
+    console.log("Minimize Window");
+    window.poruka.minimizeMsg("Minimize pong");
+}
+
+function maximize()
+{
+    console.log("Maximize Window");
+    window.poruka.maximizeMsg("maximize pong");
+}
+
+</script>
+    
+</body>
+</html>

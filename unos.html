@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNOS</title>
+    <style>
+        table {
+            width:100%;
+        }
+
+        table,th,td{
+            border:1px solid #ccc;
+        }
+        input{
+            width:50%;
+        }
+        button {
+            width:100%;
+            padding:15px;
+            background-color:#ccc;
+            font-size:1.5em;
+        }
+
+        button:hover{
+            background-color:#777;
+        }
+    </style>
+    <link rel="stylesheet" href="./titlebar.css">
+</head>
+<body>
+    <header id="titlebar">
+        <div class="draggable">
+            <div class="controls">
+                <span class="button close"></span>
+                <span class="button minimize"></span>
+                <span class="button maximize"></span>
+            </div>
+    
+            <span class="title">
+                <script>document.write(document.title)</script>
+            </span>
+        </div>
+    </header>
+
+    <table>
+        <tr><td>Id</td><td><input id="id" type="text"></td></tr>
+        <tr><td>Artikl</td><td><input id="artikl" type="text"></td></tr>
+        <tr><td>Pdv</td><td><input id="pdv" type="text"></td></tr>
+        <tr><td>Kolicina</td><td><input id="kolicina" type="text"></td></tr>
+        <tr><td>Mjera</td><td><input id="mjera" type="text"></td></tr>
+        <tr><td>Cijena</td><td><input id="cijena" type="text"></td></tr>
+    </table>
+    <button id="zatvori">Zatvori</button>
+
+    <script>
+        document.querySelector("#zatvori").addEventListener("click",closeWindow);
+
+        async function closeWindow(){
+            let idx=document.querySelector("#id").value;
+            let artiklx=document.querySelector("#artikl").value;
+            let pdvx=document.querySelector("#pdv").value;
+            let kolicinax=document.querySelector("#kolicina").value;
+            let mjerax=document.querySelector("#mjera").value;
+            let cijenax=document.querySelector("#cijena").value;
+
+            console.log(idx," ",artiklx," ",pdvx," ",kolicinax," ",mjerax," ",cijenax)
+
+
+            console.log("unos console")
+            let pp=await window.apiunos.sqlunos(idx,artiklx,pdvx,kolicinax,mjerax,cijenax);
+            console.log(pp);
+            window.apiunos.sendMsg("pong unos zatvorio prozor");
+        }
+
+
+        const closeButton = document.querySelector('.button.close');
+        const minimizeButton = document.querySelector('.button.minimize');
+        const maximizeButton = document.querySelector('.button.maximize');
+
+        closeButton.addEventListener("click",close);
+        minimizeButton.addEventListener("click",minimize);
+        maximizeButton.addEventListener("click",maximize);
+
+
+        function close()
+        {
+            console.log("Close Window");
+            window.poruka.closeMsg("Close pong");
+        }
+
+        function minimize()
+        {
+            console.log("Minimize Window");
+            window.poruka.minimizeMsg("Minimize pong");
+        }
+
+        function maximize()
+        {
+            console.log("Maximize Window");
+            window.poruka.maximizeMsg("maximize pong");
+        }
+    </script>
+
+</body>
+</html>
