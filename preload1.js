@@ -277,29 +277,29 @@ pp();
         console.log("///===////",updatekolicinax);
     }
 
-    let count=await sqlcount();
-
-    console.log('count',count);
-
-    let brojko=count[0].count;
-
-    brojko++;
-
-    let datumx=document.getElementById('datum').innerHTML;
-    let vrijemex=document.getElementById('vrijeme').innerHTML;
-
-    let sqlracunp=await sqlracun(brojko,vrijemex,datumx,suma);
-
-    console.log(sqlracunp);
-
-    let result =brojko.toString().padStart(4,'0')+"/"+datumx.substring(8,10);
-
-    document.getElementById('racun').innerHTML=result;
+    
 
    
   }
 
+  let count=await sqlcount();
 
+  console.log('count',count);
+
+  let brojko=count[0].count;
+
+  brojko++;
+
+  let datumx=document.getElementById('datum').innerHTML;
+  let vrijemex=document.getElementById('vrijeme').innerHTML;
+
+  let sqlracunp=await sqlracun(brojko,vrijemex,datumx,suma);
+
+  console.log(sqlracunp);
+
+  let result =brojko.toString().padStart(4,'0')+"/"+datumx.substring(8,10);
+
+  document.getElementById('racun').innerHTML=result;
 
 
     let sumax=document.getElementById('right').innerHTML;
