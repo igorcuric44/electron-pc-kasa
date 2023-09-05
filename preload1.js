@@ -144,6 +144,7 @@ var sqlupit=(id)=>{
   let printstr1,printstr2;
 
   let ime,prezime,adresa,telefon,oib,mjesto,poduzece;
+  var ttt=1;
 
   let pp=async ()=>{
   let xx;
@@ -194,6 +195,8 @@ pp();
         str+="8";
       else if(event.key=="9")
         str+="9";
+      else if(event.key=="a")
+        str+="a";
 
  console.log(str);
  if(event.keyCode != 13){
@@ -206,8 +209,16 @@ pp();
     
    console.log("Enter inside div");
    document.getElementById('area').style.backgroundColor="#ff0000";
-
+  
    try {
+    
+    if(str.indexOf('a')!=-1)
+    {
+      let strxx=str.split("a");
+      console.log(strxx[0],'---',strxx[1]);
+      ttt=strxx[1];
+      str=strxx[0];
+    }
     let p=await sqlupit(str);
     if (p.length==0) throw new Error('greska');
     if (str=="") throw new Error('prazno');
@@ -229,9 +240,9 @@ pp();
     cell1.innerHTML = n;
     cell2.innerHTML = p[0].id;
     cell3.innerHTML = p[0].artikl;
-    cell4.innerHTML = 1;
+    cell4.innerHTML = ttt;
     cell5.innerHTML = p[0].mjera1;
-    cell6.innerHTML = p[0].cijena1.toFixed(2);;
+    cell6.innerHTML = p[0].cijena1.toFixed(2);
     cell7.innerHTML = p[0].pdv1;
     cell8.innerHTML = 10;
     kk=p[0].cijena1;
@@ -366,24 +377,35 @@ pp();
  }
 
  if (event.keyCode == 13 && s==1)
- {
-  ss++;
+  {
+    ss++;
+    if(ttt!=1)
+    {
+  
+      ss=ttt;
+      suma+=parseFloat(ss)*parseFloat(myTable.rows[n].cells[5].innerHTML);
+      ttt=1;
+      console.log("----/////===",ss);
+  
+  } else
+    suma+=parseFloat(myTable.rows[n].cells[5].innerHTML);
+ 
   console.log("----/////",ss);
-  // cell4.innerHTML=ss;
-  // cell8.innerHTML=(parseFloat(ss)*parseFloat(kk)).toFixed(2);
+  
   myTable.rows[n].cells[3].innerHTML=ss;
   myTable.rows[n].cells[7].innerHTML=(parseFloat(ss)*parseFloat(kk)).toFixed(2);
-  suma+=parseFloat(myTable.rows[n].cells[5].innerHTML);
   document.getElementById('right').innerHTML=suma.toFixed(2);
+    
+ }  else if (event.key == 'a')
+ {
+  console.log('a-----',event.key);
+
  }
 
 
 });
 
 
-function myCreateFunction() {
-
-}
 
 function myDeleteFunction() {
   let myTable = document.getElementById('myTable').getElementsByTagName('tbody')[0];
